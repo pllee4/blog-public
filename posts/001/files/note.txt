@@ -1,0 +1,3 @@
+gcc -c -fno-builtin helloworld.c
+ld -static -T ./helloworld.lds -o helloworld helloworld.o
+objdump -S ./helloworld
