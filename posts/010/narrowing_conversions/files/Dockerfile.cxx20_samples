@@ -1,0 +1,14 @@
+FROM pllee4/ubuntu-ci:20.04-C20
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Singapore
+
+COPY ./*.cpp /cxx20_samples/
+RUN mkdir -p /cxx20_samples/build && cd /cxx20_samples/build
+COPY ./CMakeLists.txt /cxx20_samples
+RUN cd /cxx20_samples/build && cmake .. && make -j
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /cxx20_samples
+ENTRYPOINT [ "/bin/bash"]
